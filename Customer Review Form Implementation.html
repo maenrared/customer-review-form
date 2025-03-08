@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 200px;
+            background-color: #780B0D;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #CD2730;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            font-size: 20px;
+            background-color: #D77D7F;
+            width: 80%;
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {font-size: 20px;
+            background-color: #D77D7F;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 90%;
+        }
+        button:hover {
+            background-color: #e8c6cb;
+        }
+        .reviews {
+            margin-top: 20px;
+        }
+        .review-item {
+            background: #d77d7f;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Submit a review</h2>
+        <form id="reviewForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="rating">Rating:</label>
+            <select id="rating" required>
+                <option value="">Rate your satisfaction</option>
+                <option value="1">1 - Very Dissatisfied</option>
+                <option value="2">2 - Dissatisfied</option>
+                <option value="3">3 - Neutral</option>
+                <option value="4">4 - Satisfied</option>
+                <option value="5">5 - Very Satisfied</option>
+            </select>
+            
+            <label for="comment">Comment:</label>
+            <textarea id="comment" rows="4" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div class="container reviews">
+        <h2>Customer Reviews</h2>
+        <div id="reviewList"></div>
+    </div>
+    
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById("name").value;
+            let rating = document.getElementById("rating").value;
+            let comment = document.getElementById("comment").value;
+            
+            if (name && rating && comment) {
+                let reviewItem = document.createElement("div");
+                reviewItem.classList.add("review-item");
+                reviewItem.innerHTML = `<strong>${name}</strong> (Rating: ${rating}/5)<p>${comment}</p>`;
+                
+                document.getElementById("reviewList").appendChild(reviewItem);
+                document.getElementById("reviewForm").reset();
+            }
+        });
+    </script>
+</body>
+</html>
